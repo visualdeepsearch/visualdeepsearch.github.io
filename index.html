@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="VistaHop is a benchmark for repeated image inspection, visual-anchor grounding, and long-horizon evidence traversal across different visual regions."
+    />
+    <meta
+      name="keywords"
+      content="VistaHop, Visual DeepSearch, multimodal agents, benchmark, visual search"
+    />
+    <meta
+      name="author"
+      content="Hang He, Chuhuai Yue, Chengqi Dong, Chengcheng Wan, Ting Su, Haiying Sun, Jiajun Chai, Xiaohan Wang, Guojun Yin"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="VistaHop: Benchmarking Long-Horizon Visual DeepSearch"
+    />
+    <meta
+      property="og:description"
+      content="A benchmark for repeated image inspection, visual-anchor grounding, and long-horizon evidence traversal across different visual regions."
+    />
+    <meta property="og:image" content="assets/images/pipeline.png" />
+    <meta name="theme-color" content="#07161d" />
+    <title>VistaHop: Benchmarking Long-Horizon Visual DeepSearch</title>
+    <link rel="icon" type="image/png" href="assets/images/logo-clean-v2.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,700%7CNoto+Sans:400,500,600,700%7CRoboto+Mono:400,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="stylesheet" href="assets/academic.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="nav-wrap">
+      <nav class="nav container" aria-label="Primary navigation">
+        <a class="brand" href="#top">
+          <img
+            class="brand-logo"
+            src="assets/images/logo-clean-v2.png"
+            alt=""
+            aria-hidden="true"
+          />
+          <span>VistaHop</span>
+        </a>
+        <div class="nav-links">
+          <a href="#overview">Overview</a><a href="#benchmark">Benchmark</a
+          ><a href="#results">Results</a><a href="#citation">Citation</a>
+        </div>
+        <a
+          class="nav-cta"
+          href="https://github.com/ahang0712/vistahop"
+          target="_blank"
+          rel="noreferrer"
+          >GitHub ↗</a
+        >
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero academic-hero container">
+        <h1>
+          <span>VistaHop:</span> Benchmarking Long-Horizon Visual DeepSearch
+        </h1>
+        <p class="dek">
+          A benchmark for repeated image inspection, visual-anchor grounding,
+          and long-horizon evidence traversal across different visual regions.
+        </p>
+        <div class="authors">
+          <span>Hang He<sup>1,2,3</sup></span
+          ><span>Chuhuai Yue<sup>2</sup></span
+          ><span>Chengqi Dong<sup>2,4</sup></span
+          ><span>Chengcheng Wan<sup>1,3,†</sup></span
+          ><span>Ting Su<sup>1</sup></span
+          ><span>Haiying Sun<sup>1</sup></span
+          ><span>Jiajun Chai<sup>2</sup></span
+          ><span>Xiaohan Wang<sup>2</sup></span
+          ><span>Guojun Yin<sup>2,†</sup></span>
+        </div>
+        <div class="affiliations" aria-label="Author affiliations">
+          <a href="https://www.ecnu.edu.cn/" target="_blank" rel="noreferrer">
+            <sup>1</sup>
+            <span class="institution-logo"
+              ><img src="assets/logos/ecnu-seal.png" alt="ECNU logo"
+            /></span>
+            <span>East China Normal University</span>
+          </a>
+          <a href="https://www.meituan.com/" target="_blank" rel="noreferrer">
+            <sup>2</sup>
+            <span class="institution-logo meituan-logo"
+              ><img src="assets/logos/meituan-official.svg" alt="Meituan logo"
+            /></span>
+            <span>Meituan</span>
+          </a>
+          <a href="https://www.sii.edu.cn/" target="_blank" rel="noreferrer">
+            <sup>3</sup>
+            <span class="institution-logo"
+              ><img
+                src="assets/logos/sii-mark.png"
+                alt="Shanghai Innovation Institute logo"
+            /></span>
+            <span>Shanghai Innovation Institute</span>
+          </a>
+          <a href="https://www.ustc.edu.cn/" target="_blank" rel="noreferrer">
+            <sup>4</sup>
+            <span class="institution-logo institution-seal"
+              ><img src="assets/logos/ustc.svg" alt="USTC logo"
+            /></span>
+            <span>University of Science and Technology of China</span>
+          </a>
+        </div>
+        <p class="corresponding-note"><sup>†</sup>Corresponding authors</p>
+        <div class="hero-actions">
+          <a
+            class="button primary"
+            href="https://arxiv.org/abs/2606.03273"
+            target="_blank"
+            rel="noreferrer"
+            >Read on arXiv <span>↗</span></a
+          >
+          <a
+            class="button secondary"
+            href="https://github.com/ahang0712/vistahop"
+            target="_blank"
+            rel="noreferrer"
+            >Code &amp; data</a
+          >
+        </div>
+      </section>
+
+      <section class="stats-band" aria-label="Dataset statistics">
+        <div class="container stats">
+          <div><strong>350</strong><span>tasks</span></div>
+          <div><strong>300</strong><span>images</span></div>
+          <div><strong>25</strong><span>scenarios</span></div>
+          <div><strong>45.7%</strong><span>L3 tasks</span></div>
+          <div><strong>7.43</strong><span>avg. chain length</span></div>
+        </div>
+      </section>
+
+      <section class="section container" id="overview">
+        <div class="section-heading reveal">
+          <span class="index">01</span>
+          <div>
+            <p class="kicker">Overview</p>
+            <h2>Abstract</h2>
+          </div>
+        </div>
+        <div class="abstract-grid reveal">
+          <div class="prose abstract-copy">
+            <p>
+              Visual DeepSearch tasks require multimodal large reasoning models
+              to resolve complex visual queries by repeatedly inspecting image
+              regions, grounding reasoning in visual evidence, and connecting
+              fine-grained clues across multiple steps. However, existing
+              benchmarks primarily evaluate single-step visual understanding or
+              isolated visual-query response generation. They have limited
+              difficulty, limited search horizons, and single-pass image
+              inspection, and thus fail to evaluate models' ability to
+              iteratively revisit visual evidence and reason across multiple
+              steps.
+            </p>
+            <p>
+              We introduce <strong>VistaHop</strong>, a benchmark designed
+              specifically to evaluate Visual DeepSearch. It evaluates repeated
+              image inspection, visual-anchor grounding, and long-horizon
+              evidence traversal across different visual regions. VistaHop
+              comprises 300 images, 25 visual search scenarios, and 350 Visual
+              DeepSearch tasks. We also propose <strong>VistaArena</strong>, a
+              unified evaluation framework that supports tool-based
+              interactions, including visual retrieval, image inspection, and
+              evidence-grounded reasoning. Experiments show that even
+              state-of-the-art MLRMs remain far from solving VistaHop, with the
+              best-performing model, SenseNova-MARS-32B, achieving only 24.31%
+              Pass@1. These findings highlight the importance of specialized
+              benchmarks and improved agentic methods for Visual DeepSearch.
+            </p>
+          </div>
+          <div class="contribution-list">
+            <article>
+              <span>C1</span>
+              <h3>VistaHop benchmark</h3>
+              <p>
+                Evaluates long-horizon evidence traversal, repeated image
+                inspection, and evidence-grounded response generation through
+                multi-chain Visual DeepSearch tasks.
+              </p>
+            </article>
+            <article>
+              <span>C2</span>
+              <h3>Scalable construction</h3>
+              <p>
+                Generates visually grounded, long-horizon tasks while
+                controlling data quality and reducing text-only shortcuts.
+              </p>
+            </article>
+            <article>
+              <span>C3</span>
+              <h3>VistaArena evaluation</h3>
+              <p>
+                Shows that current models remain limited in long-horizon
+                evidence traversal, visual evidence revisiting, and multi-anchor
+                evidence fusion.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section dark-section" id="benchmark">
+        <div class="container">
+          <div class="section-heading reveal">
+            <span class="index">02</span>
+            <div>
+              <p class="kicker">Benchmark</p>
+              <h2>VistaHop Benchmark</h2>
+            </div>
+          </div>
+          <div class="figure-shell reveal">
+            <img
+              src="assets/images/pipeline.png"
+              alt="Seven-stage VistaHop benchmark construction pipeline"
+            />
+            <p>
+              <span>Figure 2</span> Overview of the VistaHop Construction
+              Pipeline.
+            </p>
+          </div>
+          <div class="pipeline reveal">
+            <div>
+              <b>1–2</b><span>Ground</span>
+              <p>
+                Filter high-resolution images, detect entities, and enrich
+                visual anchors.
+              </p>
+            </div>
+            <div>
+              <b>3–4</b><span>Connect</span>
+              <p>
+                Build evidence chains and write indirect, evidence-grounded
+                queries.
+              </p>
+            </div>
+            <div>
+              <b>5–6</b><span>Stress test</span>
+              <p>
+                Remove shortcuts, verify clue necessity, and fuse multiple
+                chains.
+              </p>
+            </div>
+            <div>
+              <b>7</b><span>Verify</span>
+              <p>
+                Human reviewers check uniqueness, correctness, and readability.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container evaluation">
+        <div class="section-heading reveal">
+          <span class="index">03</span>
+          <div>
+            <p class="kicker">Evaluation</p>
+            <h2>VistaArena Evaluation Framework</h2>
+          </div>
+        </div>
+        <div class="eval-grid reveal">
+          <div class="figure-shell evaluation-figure">
+            <img
+              src="assets/images/eval-framework.png"
+              alt="VistaArena search and validation agent framework"
+            />
+            <p>
+              <span>Figure 7</span> Overview of VistaArena. The Search Agent
+              performs iterative visual inspection, retrieval, and
+              evidence-grounded reasoning; the Validation Agent evaluates the
+              resulting trajectory and final answer.
+            </p>
+          </div>
+          <div class="eval-copy">
+            <div class="tool">
+              <span class="tool-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path d="M3.5 5.5h9M3.5 9.5h6" />
+                  <circle cx="14.5" cy="14.5" r="4.5" />
+                  <path d="m18 18 3 3" />
+                </svg>
+              </span>
+              <div>
+                <h3>Text Search</h3>
+                <p>
+                  Retrieve external facts and condense relevant webpage
+                  evidence.
+                </p>
+              </div>
+            </div>
+            <div class="tool">
+              <span class="tool-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <rect x="3" y="4" width="14" height="13" rx="2" />
+                  <circle cx="8" cy="9" r="1.5" />
+                  <path d="m4.5 15 3.5-3 3 2.5 2.5-2 2 1.8" />
+                  <circle cx="17.5" cy="17.5" r="3" />
+                  <path d="m19.7 19.7 1.8 1.8" />
+                </svg>
+              </span>
+              <div>
+                <h3>Image Search</h3>
+                <p>
+                  Use reverse-image evidence to resolve uncertain visual
+                  anchors.
+                </p>
+              </div>
+            </div>
+            <div class="tool">
+              <span class="tool-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path d="M6 2v14a2 2 0 0 0 2 2h14M2 6h14a2 2 0 0 1 2 2v14" />
+                </svg>
+              </span>
+              <div>
+                <h3>Image Crop</h3>
+                <p>
+                  Inspect local regions for small logos, text, objects, and
+                  symbols.
+                </p>
+              </div>
+            </div>
+            <div class="tool">
+              <span class="tool-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path
+                    d="M12 2.8 20 6v5.2c0 5-3.2 8.6-8 10-4.8-1.4-8-5-8-10V6l8-3.2Z"
+                  />
+                  <path d="m8.2 12 2.4 2.4 5.2-5.2" />
+                </svg>
+              </span>
+              <div>
+                <h3>Validation Agent</h3>
+                <p>
+                  Judge semantic correctness and evidence support with Pass@1.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section results-section" id="results">
+        <div class="container">
+          <div class="section-heading reveal">
+            <span class="index">04</span>
+            <div>
+              <p class="kicker">Experiments</p>
+              <h2>Overall Performance</h2>
+            </div>
+          </div>
+          <div class="result-lead reveal">
+            <div class="score">
+              <strong>24.31<small>%</small></strong
+              ><span>best Pass@1</span>
+            </div>
+            <p>
+              The best-performing model, SenseNova-MARS-32B, reaches only
+              <b>24.31%</b> Pass@1 under Search+Crop. The human baseline reaches
+              <b>78.38%</b>.
+            </p>
+          </div>
+          <div class="charts reveal">
+            <div class="chart-card">
+              <h3>Search + Crop Pass@1</h3>
+              <div class="bars" data-chart>
+                <div style="--v: 24.31">
+                  <span>SenseNova-MARS</span><i></i><b>24.31</b>
+                </div>
+                <div style="--v: 21.8">
+                  <span>Tongyi-DR</span><i></i><b>21.80</b>
+                </div>
+                <div style="--v: 20.79">
+                  <span>Qwen3-VL-235B</span><i></i><b>20.79</b>
+                </div>
+                <div style="--v: 20.14">
+                  <span>GPT-5.5</span><i></i><b>20.14</b>
+                </div>
+                <div style="--v: 18.97">
+                  <span>Gemini 2.5 Pro</span><i></i><b>18.97</b>
+                </div>
+                <div style="--v: 18.19">
+                  <span>Claude Sonnet 4.6</span><i></i><b>18.19</b>
+                </div>
+                <div style="--v: 16.6">
+                  <span>Qwen3-VL-30B</span><i></i><b>16.60</b>
+                </div>
+              </div>
+            </div>
+            <div class="chart-card insight">
+              <h3>What makes it hard?</h3>
+              <img
+                src="assets/images/difficulty.png"
+                alt="Difficulty distributions across visual search benchmarks"
+              />
+              <p>
+                VistaHop consists of L2 and L3 tasks, with <b>45.7%</b>
+                categorized as L3, placing substantially greater emphasis on
+                long and compositional evidence chains.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container" id="citation">
+        <div class="section-heading reveal">
+          <span class="index">05</span>
+          <div>
+            <p class="kicker">Citation</p>
+            <h2>BibTeX</h2>
+          </div>
+        </div>
+        <div class="citation-box reveal">
+          <button id="copyBib" aria-label="Copy BibTeX">Copy</button>
+          <pre><code>@misc{he2026vistahop,
+  title         = {VistaHop: Benchmarking Long-Horizon Visual DeepSearch},
+  author        = {He, Hang and Yue, Chuhuai and Dong, Chengqi and Wan, Chengcheng and Su, Ting and Sun, Haiying and Chai, Jiajun and Wang, Xiaohan and Yin, Guojun},
+  year          = {2026},
+  eprint        = {2606.03273},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV}
+}</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div>
+          <b>VistaHop</b
+          ><span>Benchmarking Long-Horizon Visual DeepSearch</span>
+        </div>
+        <p>Academic project page · 2026</p>
+      </div>
+    </footer>
+    <script src="assets/main.js"></script>
+  </body>
+</html>
