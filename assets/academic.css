@@ -103,14 +103,23 @@ body {
 }
 
 .academic-hero .authors {
+  align-items: center;
+  flex-direction: column;
   justify-content: center;
   margin-top: 28px;
-  gap: 7px 22px;
+  gap: 7px;
   color: #1d5e96;
   font-family: "Google Sans", "Noto Sans", sans-serif;
   font-size: 17px;
   font-weight: 500;
   line-height: 1.5;
+}
+
+.academic-hero .author-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px 22px;
 }
 
 .academic-hero .authors sup {
@@ -518,8 +527,11 @@ footer p {
   }
 
   .academic-hero .authors {
-    gap: 7px 16px;
     font-size: 16px;
+  }
+
+  .academic-hero .author-row {
+    gap: 7px 16px;
   }
 
   .academic-hero .affiliations {
