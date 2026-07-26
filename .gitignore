@@ -2,5 +2,6 @@
 **/.DS_Store
 __pycache__/
 *.py[cod]
+dist/
 data/vistahop/manifest.json
 data/vistahop/.file-organizer-manifest.json

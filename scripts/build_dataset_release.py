@@ -190,15 +190,7 @@ def build(source_root: Path, output_root: Path, force: bool) -> None:
         raise RuntimeError("One or more featured task IDs were not found")
 
     json_path = output_root / "vqa.json"
-    jsonl_path = output_root / "vqa.jsonl"
     write_json(json_path, records)
-    jsonl_path.write_text(
-        "".join(
-            json.dumps(record, ensure_ascii=False, separators=(",", ":")) + "\n"
-            for record in records
-        ),
-        encoding="utf-8",
-    )
 
     difficulty = Counter(record["difficulty"] for record in records)
     reasoning = Counter(
@@ -220,14 +212,17 @@ def build(source_root: Path, output_root: Path, force: bool) -> None:
 
     readme = f"""# VistaHop reviewer dataset
 
-This directory contains the reviewer-facing release of all **600 VistaHop VQA
+This directory contains the website runtime data for all **600 VistaHop VQA
 tasks** and **600 web-optimized images**.
 
 ## Files
 
-- `vqa.jsonl`: one task per line for scripts and streaming readers.
-- `vqa.json`: the same 600 records as a JSON array for the website explorer.
+- `vqa.json`: 600 records used by the website explorer.
 - `images/`: progressive JPEG derivatives with a maximum dimension of 1920 px.
+
+The reviewer download is published separately as a single self-contained JSONL.
+Each line contains the task metadata and Base64-encoded JPEG bytes in
+`image_binary`, with `image_encoding` set to `base64`.
 
 Each record contains a stable `uid`, the original `task_id`, relative `image`
 path, `task_query`, `reference`, answer aliases, category, scenario, difficulty,

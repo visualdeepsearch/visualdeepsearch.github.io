@@ -1,13 +1,16 @@
 # VistaHop reviewer dataset
 
-This directory contains the reviewer-facing release of all **600 VistaHop VQA
+This directory contains the website runtime data for all **600 VistaHop VQA
 tasks** and **600 web-optimized images**.
 
 ## Files
 
-- `vqa.jsonl`: one task per line for scripts and streaming readers.
-- `vqa.json`: the same 600 records as a JSON array for the website explorer.
+- `vqa.json`: 600 records used by the website explorer.
 - `images/`: progressive JPEG derivatives with a maximum dimension of 1920 px.
+
+The reviewer download is published separately as a single self-contained JSONL.
+Each line contains the task metadata and Base64-encoded JPEG bytes in
+`image_binary`, with `image_encoding` set to `base64`.
 
 Each record contains a stable `uid`, the original `task_id`, relative `image`
 path, `task_query`, `reference`, answer aliases, category, scenario, difficulty,

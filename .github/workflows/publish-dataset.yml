@@ -1,0 +1,52 @@
+name: Publish self-contained dataset
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/publish-dataset.yml"
+      - "data/vistahop/vqa.json"
+      - "data/vistahop/images/**"
+      - "scripts/build_embedded_jsonl.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reviewer-dataset-release
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the website
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build the embedded-image JSONL
+        run: >-
+          python scripts/build_embedded_jsonl.py
+          --dataset-root data/vistahop
+          --output dist/vistahop-600-vqa-with-images.jsonl
+
+      - name: Create or update the reviewer dataset release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          asset="dist/vistahop-600-vqa-with-images.jsonl"
+          tag="reviewer-dataset"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" "$asset" --clobber
+          else
+            gh release create "$tag" "$asset" \
+              --target "$GITHUB_SHA" \
+              --title "VistaHop Reviewer Dataset" \
+              --notes "600 VQA records in one JSONL. Each line contains the task metadata and Base64-encoded JPEG bytes."
+          fi

@@ -79,7 +79,7 @@
           <div class="author-row">
             <span>Hang He<sup>1,2,3</sup></span>
             <span>Chuhuai Yue<sup>2</sup></span>
-            <span>Chengqi Dong<sup>2,4</sup></span>
+            <span>Chengqi Dong<sup>4,2</sup></span>
             <span>Chengcheng Wan<sup>1,3,†</sup></span>
             <span>Ting Su<sup>1</sup></span>
             <span>Haiying Sun<sup>1</sup></span>
@@ -286,22 +286,16 @@
               <p class="release-eyebrow">Machine-readable release</p>
               <h3>Images + task queries + references</h3>
               <p>
-                Stable IDs, relative image paths, answer aliases, categories,
-                scenarios, difficulty labels, and chain counts are included.
+                One self-contained JSONL includes all 600 records. Every line
+                stores the image as Base64-encoded JPEG bytes together with the
+                task query, reference, and complete task metadata.
               </p>
             </div>
             <div class="release-actions">
               <a
                 class="button primary"
-                href="data/vistahop/vqa.jsonl"
-                download
+                href="https://github.com/visualdeepsearch/visualdeepsearch.github.io/releases/download/reviewer-dataset/vistahop-600-vqa-with-images.jsonl"
                 >Download JSONL</a
-              >
-              <a
-                class="button secondary"
-                href="data/vistahop/vqa.json"
-                download
-                >Download JSON</a
               >
             </div>
           </div>
