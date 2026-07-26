@@ -20,7 +20,7 @@ def sha256_bytes(value: bytes) -> str:
 
 def build(dataset_root: Path, output_path: Path) -> None:
     dataset_root = dataset_root.resolve()
-    records_path = dataset_root / "vqa.json"
+    records_path = dataset_root / "tasks.json"
     records = json.loads(records_path.read_text(encoding="utf-8"))
 
     if not isinstance(records, list) or len(records) != EXPECTED_RECORDS:
@@ -91,12 +91,12 @@ def parse_args() -> argparse.Namespace:
         "--dataset-root",
         type=Path,
         default=Path("data/vistahop"),
-        help="Directory containing vqa.json and images/",
+        help="Directory containing tasks.json and images/",
     )
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("dist/vistahop-600-vqa-with-images.jsonl"),
+        default=Path("dist/vistahop-600-tasks-with-images.jsonl"),
         help="Destination JSONL path",
     )
     return parser.parse_args()

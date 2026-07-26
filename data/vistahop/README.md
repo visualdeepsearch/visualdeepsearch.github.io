@@ -5,7 +5,7 @@ tasks** and **600 web-optimized images**.
 
 ## Files
 
-- `vqa.json`: 600 records used by the website explorer.
+- `tasks.json`: 600 records used by the website explorer.
 - `images/`: progressive JPEG derivatives with a maximum dimension of 1920 px.
 
 The reviewer download is published separately as a single self-contained JSONL.

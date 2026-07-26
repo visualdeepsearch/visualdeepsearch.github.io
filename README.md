@@ -8,9 +8,11 @@ The project page includes a searchable viewer for all **600 VQA tasks** and five
 featured cases. Each case contains its image, task query, and reference answer.
 The release is stored under `data/vistahop/`:
 
-- `vqa.jsonl`: one task per line for direct download.
-- `vqa.json`: browser-ready JSON array used by the explorer.
+- `tasks.json`: browser-ready JSON array used by the explorer.
 - `images/`: 600 web-optimized task images.
+
+The download button points to a self-contained JSONL release asset named
+`vistahop-600-tasks-with-images.jsonl`.
 
 Serve the directory locally so the browser can load the dataset files:
 
@@ -18,8 +20,9 @@ Serve the directory locally so the browser can load the dataset files:
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000/> and select **Explore dataset**. The dataset
-button and download links resolve to files in this site rather than GitHub.
+Then open <http://localhost:8000/> and select **Explore dataset**. The explorer
+loads its runtime data locally; the download button targets the generated
+release asset.
 
 ## Rebuild
 

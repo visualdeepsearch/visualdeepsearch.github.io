@@ -189,7 +189,7 @@ def build(source_root: Path, output_root: Path, force: bool) -> None:
     if sum(record["featured"] for record in records) != len(FEATURED_TASK_IDS):
         raise RuntimeError("One or more featured task IDs were not found")
 
-    json_path = output_root / "vqa.json"
+    json_path = output_root / "tasks.json"
     write_json(json_path, records)
 
     difficulty = Counter(record["difficulty"] for record in records)
@@ -217,7 +217,7 @@ tasks** and **600 web-optimized images**.
 
 ## Files
 
-- `vqa.json`: 600 records used by the website explorer.
+- `tasks.json`: 600 records used by the website explorer.
 - `images/`: progressive JPEG derivatives with a maximum dimension of 1920 px.
 
 The reviewer download is published separately as a single self-contained JSONL.

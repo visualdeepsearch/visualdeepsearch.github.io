@@ -7,7 +7,7 @@ on:
       - main
     paths:
       - ".github/workflows/publish-dataset.yml"
-      - "data/vistahop/vqa.json"
+      - "data/vistahop/tasks.json"
       - "data/vistahop/images/**"
       - "scripts/build_embedded_jsonl.py"
 
@@ -34,19 +34,21 @@ jobs:
         run: >-
           python scripts/build_embedded_jsonl.py
           --dataset-root data/vistahop
-          --output dist/vistahop-600-vqa-with-images.jsonl
+          --output dist/vistahop-600-tasks-with-images.jsonl
 
       - name: Create or update the reviewer dataset release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          asset="dist/vistahop-600-vqa-with-images.jsonl"
+          asset="dist/vistahop-600-tasks-with-images.jsonl"
+          old_asset="vistahop-600-vqa-with-images.jsonl"
           tag="reviewer-dataset"
           if gh release view "$tag" >/dev/null 2>&1; then
+            gh release delete-asset "$tag" "$old_asset" --yes >/dev/null 2>&1 || true
             gh release upload "$tag" "$asset" --clobber
           else
             gh release create "$tag" "$asset" \
               --target "$GITHUB_SHA" \
               --title "VistaHop Reviewer Dataset" \
-              --notes "600 VQA records in one JSONL. Each line contains the task metadata and Base64-encoded JPEG bytes."
+              --notes "600 benchmark tasks in one JSONL. Each line contains the task metadata and Base64-encoded JPEG bytes."
           fi

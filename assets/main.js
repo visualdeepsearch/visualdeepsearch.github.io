@@ -258,7 +258,7 @@ async function initializeDataset() {
   if (!datasetUI.grid || !datasetUI.featured) return;
 
   try {
-    const response = await fetch(`${DATASET_BASE}vqa.json`);
+    const response = await fetch(`${DATASET_BASE}tasks.json`);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     datasetRecords = await response.json();
     filteredRecords = datasetRecords;
