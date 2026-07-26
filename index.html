@@ -34,8 +34,8 @@
       href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,700%7CNoto+Sans:400,500,600,700%7CRoboto+Mono:400,500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/style.css?v=20260719" />
-    <link rel="stylesheet" href="assets/academic.css?v=20260719" />
+    <link rel="stylesheet" href="assets/style.css?v=20260727" />
+    <link rel="stylesheet" href="assets/academic.css?v=20260727b" />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
@@ -51,15 +51,17 @@
           <span>VistaHop</span>
         </a>
         <div class="nav-links">
-          <a href="#overview">Overview</a><a href="#benchmark">Benchmark</a
-          ><a href="#results">Results</a><a href="#citation">Citation</a>
+          <a href="#overview">Overview</a>
+          <a href="#benchmark">Synthesis</a>
+          <a href="#dataset">Dataset</a>
+          <a href="#results">Results</a>
         </div>
         <a
           class="nav-cta"
           href="https://github.com/ahang0712/vistahop"
           target="_blank"
           rel="noreferrer"
-          >GitHub ↗</a
+          >Code ↗</a
         >
       </nav>
     </header>
@@ -89,21 +91,29 @@
           </div>
         </div>
         <div class="affiliations" aria-label="Author affiliations">
-          <a href="https://www.ecnu.edu.cn/" target="_blank" rel="noreferrer">
+          <a href="https://english.ecnu.edu.cn/" target="_blank" rel="noreferrer">
             <sup>1</sup>
             <span class="institution-logo"
               ><img src="assets/logos/ecnu-seal.png" alt="ECNU logo"
             /></span>
             <span>East China Normal University</span>
           </a>
-          <a href="https://www.meituan.com/" target="_blank" rel="noreferrer">
+          <a
+            href="https://www.meituan.com/en-US/about-us"
+            target="_blank"
+            rel="noreferrer"
+          >
             <sup>2</sup>
             <span class="institution-logo meituan-logo"
               ><img src="assets/logos/meituan-official.svg" alt="Meituan logo"
             /></span>
             <span>Meituan</span>
           </a>
-          <a href="https://www.sii.edu.cn/" target="_blank" rel="noreferrer">
+          <a
+            href="https://www.sii.edu.cn/yw/list.htm"
+            target="_blank"
+            rel="noreferrer"
+          >
             <sup>3</sup>
             <span class="institution-logo"
               ><img
@@ -112,7 +122,7 @@
             /></span>
             <span>Shanghai Innovation Institute</span>
           </a>
-          <a href="https://www.ustc.edu.cn/" target="_blank" rel="noreferrer">
+          <a href="https://en.ustc.edu.cn/" target="_blank" rel="noreferrer">
             <sup>4</sup>
             <span class="institution-logo institution-seal"
               ><img src="assets/logos/ustc.svg" alt="USTC logo"
@@ -122,30 +132,17 @@
         </div>
         <p class="corresponding-note"><sup>†</sup>Corresponding authors</p>
         <div class="hero-actions">
-          <a
-            class="button primary"
-            href="https://arxiv.org/abs/2606.03273"
-            target="_blank"
-            rel="noreferrer"
-            >Read on arXiv <span>↗</span></a
-          >
-          <a
-            class="button secondary"
-            href="https://github.com/ahang0712/vistahop"
-            target="_blank"
-            rel="noreferrer"
-            >Code &amp; data</a
-          >
+          <a class="button primary" href="#dataset">Explore dataset</a>
         </div>
       </section>
 
       <section class="stats-band" aria-label="Dataset statistics">
         <div class="container stats">
-          <div><strong>350</strong><span>tasks</span></div>
-          <div><strong>300</strong><span>images</span></div>
+          <div><strong>600</strong><span>tasks</span></div>
+          <div><strong>600</strong><span>images</span></div>
           <div><strong>25</strong><span>scenarios</span></div>
-          <div><strong>45.7%</strong><span>L3 tasks</span></div>
-          <div><strong>7.43</strong><span>avg. chain length</span></div>
+          <div><strong>74.3%</strong><span>L3 tasks</span></div>
+          <div><strong>14.92</strong><span>avg. evidence steps</span></div>
         </div>
       </section>
 
@@ -176,13 +173,13 @@
               specifically to evaluate Visual DeepSearch. It evaluates repeated
               image inspection, visual-anchor grounding, and long-horizon
               evidence traversal across different visual regions. VistaHop
-              comprises 300 images, 25 visual search scenarios, and 350 Visual
+              comprises 600 images, 25 visual search scenarios, and 600 Visual
               DeepSearch tasks. We also propose <strong>VistaArena</strong>, a
               unified evaluation framework that supports tool-based
               interactions, including visual retrieval, image inspection, and
               evidence-grounded reasoning. Experiments show that even
               state-of-the-art MLRMs remain far from solving VistaHop, with the
-              best-performing model, SenseNova-MARS-32B, achieving only 24.31%
+              best-performing model, SenseNova-MARS-32B, achieving only 26.33%
               Pass@1. These findings highlight the importance of specialized
               benchmarks and improved agentic methods for Visual DeepSearch.
             </p>
@@ -223,8 +220,8 @@
           <div class="section-heading reveal">
             <span class="index">02</span>
             <div>
-              <p class="kicker">Benchmark</p>
-              <h2>VistaHop Benchmark</h2>
+              <p class="kicker">Task Synthesis</p>
+              <h2>VistaHop Construction Pipeline</h2>
             </div>
           </div>
           <div class="figure-shell reveal">
@@ -269,9 +266,125 @@
         </div>
       </section>
 
+      <section class="section dataset-section" id="dataset">
+        <div class="container">
+          <div class="section-heading reveal">
+            <span class="index">03</span>
+            <div>
+              <p class="kicker">Reviewer dataset</p>
+              <h2>Explore all 600 VQA tasks</h2>
+              <p class="section-intro">
+                Every record pairs a web-optimized image with its task query and
+                reference answer. Start with the featured cases, then filter the
+                complete release by difficulty, category, or reasoning form.
+              </p>
+            </div>
+          </div>
+
+          <div class="dataset-release-panel reveal">
+            <div>
+              <p class="release-eyebrow">Machine-readable release</p>
+              <h3>Images + task queries + references</h3>
+              <p>
+                Stable IDs, relative image paths, answer aliases, categories,
+                scenarios, difficulty labels, and chain counts are included.
+              </p>
+            </div>
+            <div class="release-actions">
+              <a
+                class="button primary"
+                href="data/vistahop/vqa.jsonl"
+                download
+                >Download JSONL</a
+              >
+              <a
+                class="button secondary"
+                href="data/vistahop/vqa.json"
+                download
+                >Download JSON</a
+              >
+            </div>
+          </div>
+
+          <div class="dataset-mini-stats reveal" aria-label="Dataset composition">
+            <div><strong>600</strong><span>VQA records</span></div>
+            <div><strong>154</strong><span>L2 tasks</span></div>
+            <div><strong>446</strong><span>L3 tasks</span></div>
+            <div><strong>138</strong><span>single-chain</span></div>
+            <div><strong>462</strong><span>multi-chain</span></div>
+          </div>
+
+          <div class="dataset-subheading reveal">
+            <div>
+              <p class="kicker">Featured examples</p>
+              <h3>Five representative cases</h3>
+            </div>
+            <p>
+              Cross-domain examples selected for clear visual anchors,
+              multi-entity reasoning, and natural task wording.
+            </p>
+          </div>
+          <div
+            class="featured-cases reveal"
+            id="featuredExamples"
+            aria-live="polite"
+          >
+            <p class="dataset-loading">Loading featured cases…</p>
+          </div>
+
+          <div class="dataset-explorer reveal">
+            <div class="dataset-explorer-head">
+              <div>
+                <p class="kicker">Full benchmark</p>
+                <h3>Browse the complete release</h3>
+              </div>
+              <span id="datasetCount">Loading 600 records…</span>
+            </div>
+            <div class="dataset-controls" role="search">
+              <label class="search-control">
+                <span>Search</span>
+                <input
+                  id="datasetSearch"
+                  type="search"
+                  placeholder="Search query, reference, scenario, or ID"
+                  autocomplete="off"
+                />
+              </label>
+              <label>
+                <span>Difficulty</span>
+                <select id="datasetDifficulty">
+                  <option value="">All</option>
+                  <option value="L2">L2</option>
+                  <option value="L3">L3</option>
+                </select>
+              </label>
+              <label>
+                <span>Category</span>
+                <select id="datasetCategory">
+                  <option value="">All categories</option>
+                </select>
+              </label>
+              <label>
+                <span>Reasoning</span>
+                <select id="datasetReasoning">
+                  <option value="">All forms</option>
+                  <option value="single">Single-chain</option>
+                  <option value="multi">Multi-chain</option>
+                </select>
+              </label>
+              <button id="datasetReset" type="button">Reset</button>
+            </div>
+            <div class="dataset-grid" id="datasetGrid" aria-live="polite"></div>
+            <div class="dataset-more">
+              <button id="datasetLoadMore" type="button">Load 12 more</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section container evaluation">
         <div class="section-heading reveal">
-          <span class="index">03</span>
+          <span class="index">04</span>
           <div>
             <p class="kicker">Evaluation</p>
             <h2>VistaArena Evaluation Framework</h2>
@@ -280,8 +393,12 @@
         <div class="eval-grid reveal">
           <div class="figure-shell evaluation-figure">
             <img
-              src="assets/images/eval-framework.png"
-              alt="VistaArena search and validation agent framework"
+              src="assets/images/eval-framework.png?v=20260727"
+              width="1587"
+              height="1416"
+              loading="lazy"
+              decoding="async"
+              alt="VistaArena overview showing the Search Agent, multimodal tools, iterative search trajectory, and Validation Agent decision flow"
             />
             <p>
               <span>Figure 7</span> Overview of VistaArena. The Search Agent
@@ -362,7 +479,7 @@
       <section class="section results-section" id="results">
         <div class="container">
           <div class="section-heading reveal">
-            <span class="index">04</span>
+            <span class="index">05</span>
             <div>
               <p class="kicker">Experiments</p>
               <h2>Overall Performance</h2>
@@ -370,50 +487,54 @@
           </div>
           <div class="result-lead reveal">
             <div class="score">
-              <strong>24.31<small>%</small></strong
+              <strong>26.33<small>%</small></strong
               ><span>best Pass@1</span>
             </div>
             <p>
               The best-performing model, SenseNova-MARS-32B, reaches only
-              <b>24.31%</b> Pass@1 under Search+Crop. The human baseline reaches
-              <b>78.38%</b>.
+              <b>26.33%</b> Pass@1 under Search+Crop. The human baseline reaches
+              <b>79.50%</b>.
             </p>
           </div>
           <div class="charts reveal">
             <div class="chart-card">
               <h3>Search + Crop Pass@1</h3>
               <div class="bars" data-chart>
-                <div style="--v: 24.31">
-                  <span>SenseNova-MARS</span><i></i><b>24.31</b>
+                <div style="--v: 26.33">
+                  <span>SenseNova-MARS</span><i></i><b>26.33</b>
                 </div>
-                <div style="--v: 21.8">
-                  <span>Tongyi-DR</span><i></i><b>21.80</b>
+                <div style="--v: 18.93">
+                  <span>Tongyi-DR</span><i></i><b>18.93</b>
                 </div>
-                <div style="--v: 20.79">
-                  <span>Qwen3-VL-235B</span><i></i><b>20.79</b>
+                <div style="--v: 17.92">
+                  <span>Qwen3-VL-235B</span><i></i><b>17.92</b>
                 </div>
-                <div style="--v: 20.14">
-                  <span>GPT-5.5</span><i></i><b>20.14</b>
+                <div style="--v: 17.15">
+                  <span>GPT-5.2</span><i></i><b>17.15</b>
                 </div>
-                <div style="--v: 18.97">
-                  <span>Gemini 2.5 Pro</span><i></i><b>18.97</b>
+                <div style="--v: 16.72">
+                  <span>Gemini 2.5 Pro</span><i></i><b>16.72</b>
                 </div>
-                <div style="--v: 18.19">
-                  <span>Claude Sonnet 4.6</span><i></i><b>18.19</b>
+                <div style="--v: 15.93">
+                  <span>Claude Opus 4.5</span><i></i><b>15.93</b>
                 </div>
-                <div style="--v: 16.6">
-                  <span>Qwen3-VL-30B</span><i></i><b>16.60</b>
+                <div style="--v: 14.21">
+                  <span>Qwen3-VL-30B</span><i></i><b>14.21</b>
                 </div>
               </div>
             </div>
             <div class="chart-card insight">
               <h3>What makes it hard?</h3>
               <img
-                src="assets/images/difficulty.png"
-                alt="Difficulty distributions across visual search benchmarks"
+                src="assets/images/difficulty.png?v=20260727"
+                width="2294"
+                height="1383"
+                loading="lazy"
+                decoding="async"
+                alt="Difficulty distribution comparison showing that 74.3 percent of VistaHop tasks are L3, substantially more than in the other visual search benchmarks"
               />
               <p>
-                VistaHop consists of L2 and L3 tasks, with <b>45.7%</b>
+                VistaHop consists of L2 and L3 tasks, with <b>74.3%</b>
                 categorized as L3, placing substantially greater emphasis on
                 long and compositional evidence chains.
               </p>
@@ -422,27 +543,56 @@
         </div>
       </section>
 
-      <section class="section container" id="citation">
-        <div class="section-heading reveal">
-          <span class="index">05</span>
-          <div>
-            <p class="kicker">Citation</p>
-            <h2>BibTeX</h2>
+      <section class="visitor-statistics" aria-labelledby="visitor-statistics-title">
+        <div class="container">
+          <div class="visitor-statistics-heading">
+            <p class="kicker">Project reach</p>
+            <h2 id="visitor-statistics-title">Visitor Statistics</h2>
           </div>
-        </div>
-        <div class="citation-box reveal">
-          <button id="copyBib" aria-label="Copy BibTeX">Copy</button>
-          <pre><code>@misc{he2026vistahop,
-  title         = {VistaHop: Benchmarking Long-Horizon Visual DeepSearch},
-  author        = {He, Hang and Yue, Chuhuai and Dong, Chengqi and Wan, Chengcheng and Su, Ting and Sun, Haiying and Chai, Jiajun and Wang, Xiaohan and Yin, Guojun},
-  year          = {2026},
-  eprint        = {2606.03273},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.CV}
-}</code></pre>
+          <div class="visitor-statistics-grid">
+            <div>
+              <span class="visitor-statistics-label">Unique visitors</span>
+              <strong id="busuanzi_site_uv" aria-live="polite">—</strong>
+            </div>
+            <div>
+              <span class="visitor-statistics-label">Total page views</span>
+              <strong id="busuanzi_site_pv" aria-live="polite">—</strong>
+            </div>
+            <div>
+              <span class="visitor-statistics-label">Current page views</span>
+              <strong id="busuanzi_page_pv" aria-live="polite">—</strong>
+            </div>
+          </div>
+          <p class="visitor-statistics-note">
+            Aggregate counts update automatically on the published project page.
+          </p>
         </div>
       </section>
     </main>
+
+    <dialog class="dataset-dialog" id="datasetDialog">
+      <button
+        class="dialog-close"
+        id="datasetDialogClose"
+        type="button"
+        aria-label="Close case viewer"
+      >
+        ×
+      </button>
+      <div class="dialog-layout">
+        <div class="dialog-image-shell">
+          <img id="datasetDialogImage" alt="" />
+        </div>
+        <div class="dialog-copy">
+          <div class="case-badges" id="datasetDialogBadges"></div>
+          <p class="case-id" id="datasetDialogId"></p>
+          <h3>Task query</h3>
+          <p class="dialog-query" id="datasetDialogQuery"></p>
+          <h3>Reference</h3>
+          <p class="dialog-reference" id="datasetDialogReference"></p>
+        </div>
+      </div>
+    </dialog>
 
     <footer>
       <div class="container">
@@ -453,6 +603,6 @@
         <p>Academic project page · 2026</p>
       </div>
     </footer>
-    <script src="assets/main.js"></script>
+    <script src="assets/main.js?v=20260727b"></script>
   </body>
 </html>
